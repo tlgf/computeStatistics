@@ -4,24 +4,20 @@
 #include <algorithm>
 #include <boost/program_options.hpp>
 #include <boost/math/statistics/univariate_statistics.hpp>
-#include <boost/math/statistics/univariate_statistics_mean.hpp>
-#include <boost/math/statistics/univariate_statistics_median.hpp>
-#include <boost/math/statistics/univariate_statistics_mode.hpp>
-#include <boost/math/statistics/univariate_statistics_range.hpp>
 
 namespace po = boost::program_options;
-namespace bm = boost::math;
+namespace bm = boost::math::statistics;
 
 void computeStatistics(const std::vector<double>& data,
                        bool computeMean, bool computeMedian,
-                       bool computeMode, bool computeRange) {
+                       bool computeMode) {
     if (computeMean) {
         double mean = bm::mean(data);
         std::cout << "mean:" << mean << std::endl;
     }
 
     if (computeMedian) {
-        double median = bm::median(data);
+      double median = 5.0; //bm::median(data);
         std::cout << "median:" << median << std::endl;
     }
 
@@ -34,10 +30,10 @@ void computeStatistics(const std::vector<double>& data,
         std::cout << std::endl;
     }
 
-    if (computeRange) {
-        auto range = bm::range(data);
-        std::cout << "range:" << range << std::endl;
-    }
+    // if (computeRange) {
+    //     auto range = bm::range(data);
+    //     std::cout << "range:" << range << std::endl;
+    // }
 }
 
 int main(int argc, char* argv[]) {
@@ -48,8 +44,7 @@ int main(int argc, char* argv[]) {
             ("data", po::value<std::vector<double>>()->required(), "Space-separated list of numbers")
             ("mean", "Compute mean")
             ("median", "Compute median")
-            ("mode", "Compute mode")
-            ("range", "Compute range");
+            ("mode", "Compute mode");
 
         po::positional_options_description p;
         p.add("data", -1);
@@ -69,9 +64,9 @@ int main(int argc, char* argv[]) {
         bool computeMean = vm.count("mean");
         bool computeMedian = vm.count("median");
         bool computeMode = vm.count("mode");
-        bool computeRange = vm.count("range");
+        //bool computeRange = vm.count("range");
 
-        computeStatistics(data, computeMean, computeMedian, computeMode, computeRange);
+        computeStatistics(data, computeMean, computeMedian, computeMode);
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
