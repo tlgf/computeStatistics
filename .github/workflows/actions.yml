@@ -5,7 +5,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: ls
+      - uses: actions/checkout@v3
+      - run: ls -lahn
       - run: pip install conan
       - run: ./project.sh
 
