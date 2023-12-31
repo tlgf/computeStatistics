@@ -1,0 +1,10 @@
+name: computestatistics CI actions
+run-name:
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: python pip install conan
+      - run: ./project.sh
+
