@@ -1,6 +1,7 @@
 name: computestatistics CI actions
-run-name:
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
