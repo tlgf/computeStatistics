@@ -1,5 +1,5 @@
 include(CMakePrintHelpers)
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
 project(computeStatistics)
 find_package(Boost REQUIRED)
 cmake_print_variables(Boost_FOUND)
