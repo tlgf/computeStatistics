@@ -6,8 +6,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls -lahn
-      - run: pip install conan
-      - run: conan profile detect
-      - run: ./project.sh
 
+      - name: Conan Setup
+        run: pip install conan
+        run: conan profile detect
+
+      - name: CMake Build
+        run: ./project.sh
+
+      - name: Test Build
+        working-directory: ${{github.workspace}}/build
+        run: ./computeStatistics --help
+        run: ./computeStatistics --data 1 2 3 4 5 --mean --mode --median
