@@ -1,0 +1,24 @@
+name: computestatistics CI actions
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Conan Setup
+        run: |
+          pip install conan
+          conan profile detect
+
+      - name: CMake Build
+        run: ./project.sh
+
+      - name: Test Build
+        working-directory: ./build
+        run: |
+          ./computeStatistics --help
+          ./computeStatistics --data 1 2 3 4 5 --mean --mode --median
