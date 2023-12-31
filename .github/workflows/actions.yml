@@ -5,11 +5,12 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
       - name: Conan Setup
-      - run: |
+        run: |
           pip install conan
           conan profile detect
 
